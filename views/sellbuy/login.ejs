@@ -1,0 +1,84 @@
+  <%- include ../sellbuylayouts/header.ejs %>
+    <div id="signup" class="popupContainer bg-white">
+        <header class="popupHeader p-3 text-uppercase">
+            <span class="header_title font-weight-bold c-dark">Login</span>
+        </header>
+        <div class="card-body">
+            <!-- Social Login -->						
+            <!-- Username & Password Login form -->
+            <div class="user_login">
+                <form id="login_form" action="/user_login" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control rounded-0" name="user_name" id="user_name" placeholder="username or email address" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control rounded-0" name="password" id="password" placeholder="password" />
+                    </div>
+                    <div class="checkbox form-group">
+                        <input id="remember" type="checkbox" />
+                        <label for="remember">Remember me on this computer</label>
+                    </div>
+                    <div class="action_btns form-group">
+                        <button type="submit" class="btn btn-primary btn-md btn-block">Login</button>
+                    </div>
+                    <div class="form-group mb-0 text-center">
+                        <p>Sign in with your social network</p>
+                        <ul class="list-inline footer-social mb-2">
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook pr-3"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter pr-3"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin pr-3"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest-p pr-3"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                        <div class="border border-top-0 c-brd-light my-3"></div>
+                        Don't have an account <a href="/registration" class="register_form c-primary">Sign Up</a>
+                    </div>  
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-3.3.1.min.js"></script>
+     <script>
+   
+     $(document).on('submit','#login_form',function(e){
+       // alert('ok');
+                    e.preventDefault();
+                    if($('#user_name').val() == ''){
+                     alert('User Name or Email Address is Required!!');
+                     document.getElementById("user_name").focus();
+                     return false;
+
+                    
+                    }else if($('#password').val() == ''){
+                        
+                       alert('Password is Required!!');
+                       document.getElementById("password").focus();
+                      return false;
+
+                    }else{ 
+                    var formData = new FormData(this);  
+                    console.log()                
+                    $.post({
+                        type:'POST',
+                        url:$(this).attr('action'),
+                        data:formData,
+                        cashe:false,
+                        contentType:false,
+                        processData:false,                      
+                        success:function(data){
+                         //  alert(data)
+                            alert(data.message);
+                            window.location.href = "http://127.0.0.1:3000/login";
+                        },
+                        error:function(data){
+                            
+                            alert(data.message);
+                        }
+                    },'json');
+                 }
+                 
+                });
+     
+      </script>
+</body>
+</html>
