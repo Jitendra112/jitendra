@@ -3,10 +3,6 @@ var express = require('express')
 var app = express()
 const {database} = require('../db.js')
 
-
-
-
-
 app.get('/', function(req, res, next) {
     
         res.render('sellbuy/index', {
@@ -62,39 +58,61 @@ app.get('/login', function(req, res, next) {
 })
 var sess;
 app.post('/user_login',async function(req, res, next){
-    sess=req.session;
-       
+       sess=req.session;
+       sess.udata;
+      
     //console.log(sess)
    
 
-       var query = 'SELECT COUNT(user_name) FROM tbl_user Where user_name = "' + req.body.user_name + '"';
-       // console.log(query);
+       var query = 'SELECT * FROM tbl_user Where user_name = "' + req.body.user_name + '" && password = "' + req.body.password  + '"';
+        //console.log(query);
         results = await database.query(query, [] );
         //console.log(results);
-        if(results > 0){
+        if(results.length > 0 ){
          
-          sess.username =  req.body.user_name 
-         console.log(sess.username);
-
-
-
-        }
-        //   var query = 'INSERT INTO tbl_user  SET ? ';
-        //   results = await database.query(query, [cl] );
-        //       if (results) {
-        //           res.writeHead(200, {'Content-Type': 'application/json'});
-        //           var obj = {success : 1 , message : 'Registration Done Successfully!!'}
-        //           res.end(JSON.stringify(obj));
+          sess.udata = JSON.parse(results);
+        
+        
+       
+                  res.writeHead(200, {'Content-Type': 'application/json'});
+                  var obj = {success : 1 , message : 'Login Successfully!!'}
+                  res.end(JSON.stringify(obj));
                   
-        //       } else {
+              } else {
 
-        //           res.writeHead(200, {'Content-Type': 'application/json'});
-        //           var obj = {success : 0 , message : 'Registration Failed!! '}
-        //           res.end(JSON.stringify(obj));
+                  res.writeHead(200, {'Content-Type': 'application/json'});
+                  var obj = {success : 0 , message : 'Login Failed!! '}
+                  res.end(JSON.stringify(obj));
                   
-        //       }
-         
+              }
+
+      
 })
+
+app.get('/user', function(req, res, next) {
+    console.log(req.session.udata); 
+res.locals.udata = req.session.udata;
+var g = res.locals.udata;
+
+if(g) {
+        res.render('sellbuy/user', {
+            title: 'Add content',
+             
+    }) 
+ } else{
+    res.render('sellbuy/login', {
+        title: 'Add content',
+        
+    }) 
+
+ }
+})
+
+app.get('/logout', function (req, res) {
+    req.session.destroy();
+      res.redirect('/login');
+  });
+    
 
 // app.get('/selectclass', async function(req, res, next) {
 //     req.session.myclass =  req.query.id;
