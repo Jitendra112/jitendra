@@ -95,8 +95,8 @@ app.post('/user_login',async function(req, res, next){
 
 app.get('/sellcar', function(req, res, next) {
    // console.log(req.session.udata); 
-res.locals.udata = req.session.udata;
-var g = res.locals.udata;
+ res.locals.udata = req.session.udata;
+ var g = res.locals.udata;
 
 if(g) {
         res.render('sellbuy/sellcar', {
