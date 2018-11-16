@@ -11,11 +11,13 @@ app.get('/', function(req, res, next) {
         }) 
 })
 
-app.get('/registration', function(req, res, next) {
-
+app.get('/registration', async function(req, res, next) {
+   
+    var query = "select * from tbl_countries ORDER BY id ASC";
+    results = await database.query(query, [] );
     res.render('sellbuy/registration', {
         title: 'Add content',
-        
+        data: JSON.parse(results)
     }) 
 })
 
@@ -27,6 +29,8 @@ app.post('/register',async function(req, res, next){
             user_name: req.sanitize('user_name').escape().trim(),
             email: req.sanitize('email_address').escape().trim(),
             password: req.sanitize('password').escape().trim(),
+            country_id: req.sanitize('country').escape().trim(),
+            state_id: req.sanitize('State').escape().trim(),
             postal_code: req.sanitize('postal_code').escape().trim(),
             role: 'U',
         }
@@ -89,13 +93,13 @@ app.post('/user_login',async function(req, res, next){
       
 })
 
-app.get('/user', function(req, res, next) {
-    console.log(req.session.udata); 
+app.get('/sellcar', function(req, res, next) {
+   // console.log(req.session.udata); 
 res.locals.udata = req.session.udata;
 var g = res.locals.udata;
 
 if(g) {
-        res.render('sellbuy/user', {
+        res.render('sellbuy/sellcar', {
             title: 'Add content',
              
     }) 
@@ -112,8 +116,13 @@ app.get('/logout', function (req, res) {
     req.session.destroy();
       res.redirect('/login');
   });
-    
 
+app.get('/show_states', async function(req, res, next) {
+    var query = 'SELECT * FROM  tbl_states where country_id = '+req.query.id;
+     results = await database.query(query, [] );
+       // res.writeHead(200, {'Content-Type': 'application/json'});
+        res.send(results);  
+});
 // app.get('/selectclass', async function(req, res, next) {
 //     req.session.myclass =  req.query.id;
 //     var query = 'SELECT * FROM  tbl_topic where class_id = ' +req.query.id +  '  && subject_id=' + req.query.sid;
