@@ -24,6 +24,8 @@
                     <div class="form-group mb-0 text-center">
                         <p>Sign in with your social network</p>
                         <ul class="list-inline footer-social mb-2">
+                            <!-- <li class="list-inline-item"><a href="/google"><i class="fa fa-google-plus pr-3"></i></a></li> -->
+                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-facebook pr-3"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-twitter pr-3"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin pr-3"></i></a></li>
@@ -79,6 +81,15 @@
                  }
                  
                 });
+
+
+  function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
      
       </script>
 </body>

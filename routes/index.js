@@ -2,6 +2,7 @@
 var express = require('express')
 var app = express()
 const {database} = require('../db.js')
+const passport = require('passport');
 
 app.get('/', function(req, res, next) {
     
@@ -123,6 +124,30 @@ app.get('/show_states', async function(req, res, next) {
        // res.writeHead(200, {'Content-Type': 'application/json'});
         res.send(results);  
 });
+
+
+// Auth wiith google
+
+
+// app.get('/google', passport.authenticate('google', {
+
+
+//   scope:['profile' , 'email']
+
+// }))
+
+// // callback route for google to redirect
+
+// app.get('/google/redirect',passport.authenticate('google'),(req,res)=> {
+
+//   res.send('You reached callback URI');
+
+
+// });
+
+
+
+
 // app.get('/selectclass', async function(req, res, next) {
 //     req.session.myclass =  req.query.id;
 //     var query = 'SELECT * FROM  tbl_topic where class_id = ' +req.query.id +  '  && subject_id=' + req.query.sid;
