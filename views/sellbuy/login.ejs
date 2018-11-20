@@ -39,6 +39,7 @@
             </div>
         </div>
     </div>
+
     <script src="js/jquery-3.3.1.min.js"></script>
      <script>
    
@@ -70,7 +71,7 @@
                         success:function(data){
                          //  alert(data)
                             alert(data.message);
-                            window.location.href = "http://50.116.30.57:3000/sellcar";
+                            window.location.href = "http://sellbuymotors.co.uk/sellcar";
                         },
                         error:function(data){
                             
@@ -89,8 +90,41 @@
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+           var id = profile.getId();
+           var email = profile.getEmail();
+           var name = profile.getName();
+           
+            
+             $.get('/google_login?id=' + id + '&sid=' + email +'&vid=' + name ,function(res){
+                       
+                        
+                        window.location.href = "http://sellbuymotors.co.uk/sellcar";
+                                        
+                       
+                    },'json');   
+
+
+
+
+
+
+
+
+
 }
      
       </script>
+
+      <script>
+    function signOut() {
+    console.log('User signed out.');
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      window.location.href = "http://sellbuymotors.co.uk/login";
+      console.log('User signed out.');
+    });
+  }
+</script>
 </body>
 </html>

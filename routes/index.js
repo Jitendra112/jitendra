@@ -115,6 +115,7 @@ if(g) {
 
 app.get('/logout', function (req, res) {
     req.session.destroy();
+
       res.redirect('/login');
   });
 
@@ -128,13 +129,37 @@ app.get('/show_states', async function(req, res, next) {
 
 // Auth wiith google
 
+var sess;
+app.get('/google_login',async function (req, res) {
 
-// app.get('/google', passport.authenticate('google', {
+ var query = 'SELECT * FROM  tbl_user where email =  "' + req.query.sid  +  '"';
+
+  //console.log(query);
+  results = await database.query(query, [] );
+
+  if(results.length > 0){
+   console.log(results.length);
+   sess=req.session;
+   sess.udata;
+   sess.udata = JSON.parse(results);
+   console.log(sess.udata)
+  var query ='Update tbl_user SET google_id ="' + req.query.id + '" Where email="' + req.query.sid  +  '"';
+
+  results = await database.query(query, [] );
+    res.send(results); 
+    
+  }else{
+   
+   var query = 'INSERT INTO tbl_user(google_id,user_name,email)VALUES("'+ req.query.id +'" ,"'+ req.query.vid +'" ,"' + req.query.sid  +  '")';
+    sess=req.session;
+     sess.udata;
+    results = await database.query(query, [] );
+     sess.udata = JSON.parse(results);
+      res.send(results); 
+  }
 
 
-//   scope:['profile' , 'email']
-
-// }))
+})
 
 // // callback route for google to redirect
 

@@ -116,6 +116,25 @@
     <!-- jQuery -->
     <script src="js/plugins.min.js"></script>
     <script src="js/common.js"></script>
+     <script src="js/jquery-3.3.1.min.js"></script>
+     <script>
+    function signOut() {
+   // console.log('User signed out.');
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      window.location.href = "http://sellbuymotors.co.uk/login";
+      console.log('User signed out.');
+    });
+  }
+
+  function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+    }
+
+</script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 </body>
 
 </html>

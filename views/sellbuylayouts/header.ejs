@@ -9,7 +9,7 @@
 
                <title>SellBuyMotors</title>  
 
-                <meta name="google-signin-client_id" content="594390701809-qcflr76j6g8da3g3aib1heqaktqtclf1.apps.googleusercontent.com">
+     <meta name="google-signin-client_id" content="488295508798-pb9c5nqsvotv5jp2j0juhjst4iipmq1j.apps.googleusercontent.com">
                  <script src="https://apis.google.com/js/platform.js" async defer></script>
                  
                <!-- Favicon -->
@@ -37,7 +37,7 @@
                                    <div class="top-right">
                                        <ul class="list-inline mb-0">
                                         <% if(locals.udata) { %>
-                                           <li class="list-inline-item"><i class="fa fa-user pr-1"></i> <a href="#" class="c-primary login_form"><%= locals.udata[0].user_name %></a> | <a href="/logout" class="register_form c-primary">Logout </a></li>
+                                           <li class="list-inline-item"><i class="fa fa-user pr-1"></i> <a href="#" class="c-primary login_form"><%= locals.udata[0].user_name %></a> | <a href="/logout" class="register_form c-primary" onclick="signOut();" >Logout </a></li>
                                           <% } else { %>
                                             <li class="list-inline-item"><i class="fa fa-user pr-1"></i> <a href="/login" class="c-primary login_form"> Login </a> Or <a href="/registration" class="register_form c-primary"> Register </a></li>
                                           <% } %>
