@@ -130,8 +130,8 @@ app.get('/show_states', async function(req, res, next) {
 // Auth wiith google
 
 var sess;
-app.get('/google_login',async function (req, res) {
-
+app.get('/google_login', async function (req, res, next) {
+  
  var query = 'SELECT * FROM  tbl_user where email =  "' + req.query.sid  +  '"';
 
   //console.log(query);
