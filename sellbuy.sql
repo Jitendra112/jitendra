@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 16, 2018 at 06:19 PM
+-- Generation Time: Nov 20, 2018 at 07:42 PM
 -- Server version: 5.7.24-0ubuntu0.18.04.1
 -- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
@@ -4403,13 +4403,15 @@ INSERT INTO `tbl_states` (`id`, `name`, `country_id`) VALUES
 
 CREATE TABLE `tbl_user` (
   `id` int(11) NOT NULL,
-  `user_name` varchar(100) NOT NULL,
+  `user_name` varchar(100) DEFAULT NULL,
+  `google_id` varchar(50) DEFAULT NULL,
+  `facebook_id` int(50) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `country_id` int(11) NOT NULL,
-  `state_id` int(11) NOT NULL,
-  `postal_code` varchar(20) NOT NULL,
-  `role` varchar(20) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `postal_code` varchar(20) DEFAULT NULL,
+  `role` varchar(20) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -4417,8 +4419,9 @@ CREATE TABLE `tbl_user` (
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`id`, `user_name`, `email`, `password`, `country_id`, `state_id`, `postal_code`, `role`, `created_at`) VALUES
-(8, 'kush', 'kush@gmail.com', 'welcome', 101, 32, '156200', 'U', '2018-11-16 05:41:45');
+INSERT INTO `tbl_user` (`id`, `user_name`, `google_id`, `facebook_id`, `email`, `password`, `country_id`, `state_id`, `postal_code`, `role`, `created_at`) VALUES
+(8, 'kush', '108169144019802726494', NULL, 'jitendragniabs@gmail.com', 'welcome', 101, 32, '156200', 'U', '2018-11-20 12:06:57'),
+(13, 'MultiJitendra1', '114112773907484109796', NULL, 'jitendra.15love@gmail.com', NULL, NULL, NULL, NULL, NULL, '2018-11-20 13:58:35');
 
 --
 -- Indexes for dumped tables
@@ -4460,7 +4463,7 @@ ALTER TABLE `tbl_states`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
