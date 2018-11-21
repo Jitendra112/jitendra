@@ -70,7 +70,7 @@ app.post('/user_login',async function(req, res, next){
    
 
        var query = 'SELECT * FROM tbl_user Where user_name = "' + req.body.user_name + '" && password = "' + req.body.password  + '"';
-       console.log(query);
+      // console.log(query);
         results = await database.query(query, [] );
         //console.log(results.length);
         if(results.length > 0 ){
