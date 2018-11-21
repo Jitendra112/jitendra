@@ -70,14 +70,19 @@
                         processData:false,                      
                         success:function(data){
                          //  alert(data)
-                            alert(data.message);
+                         if(data.success = 1){
+                            alert(data.success);
                             window.location.href = "http://sellbuymotors.co.uk/sellcar";
-                        },
-                        error:function(data){
-                            
+
+                          }else{
+
                             alert(data.message);
                             location.reload();
-                        }
+
+                          }},
+
+                        
+                       
                     },'json');
                  }
                  
