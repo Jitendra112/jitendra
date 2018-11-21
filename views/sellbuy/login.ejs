@@ -98,10 +98,16 @@
             
              $.get(base_url + '/google_login?id=' + id + '&sid=' + email +'&vid=' + name ,function(res){
                        
+                        if(res.success = 1){
                         
                         window.location.href = "http://sellbuymotors.co.uk/sellcar";
                                         
-                       
+                        }else{
+
+
+                          console.log('here')
+
+                        }
                     },'json');   
 
 
